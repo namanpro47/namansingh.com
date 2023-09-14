@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { context } from "../context/context";
 import SectionContainer from "./SectionContainer";
 const homeData = {
-  skills: ["Designer", "Coder", "Player"],
+  skills: ["Scrappy Engineer", "Hustling Entrepreneur", "Passionate Creator", "Lifelong Coder"],
 };
 const Home = () => {
   const [text, setText] = useState(0);
@@ -21,13 +21,13 @@ const Home = () => {
             <div className="left">
               <div className="title">
                 <h3>
-                  Hi, I'm <span className="blueColor">Elisc!</span>
+                  Hey, I'm <span className="blueColor">Naman!</span>
                 </h3>
                 <h3>
                   <span className="cd-headline rotate-1">
                     {" "}
                     {/* ANIMATE TEXT VALUES: zoom, rotate-1, letters type, letters rotate-2, loading-bar, slide, clip, letters rotate-3, letters scale, push,  */}
-                    <span className="blc">Creative</span>{" "}
+                    <span className="blc"></span>{" "}
                     <span className="cd-words-wrapper">
                       {homeData.skills.map((skill, i) => (
                         <b
@@ -40,13 +40,11 @@ const Home = () => {
                     </span>
                   </span>
                 </h3>
-                <h3>Based in Florida</h3>
+                <h3>Based in SF</h3>
               </div>
               <div className="subtitle">
                 <p>
-                  I'm a Florida based web designer &amp; front‑end developer
-                  with <span className="blueColor">10+ years</span> of
-                  experience
+                  I've been building software for <span className="blueColor">8+ years</span>, and scaling startups for <span className="blueColor">4+ years</span>, with no plans on slowing down. Shoot me a message on LinkedIn or email if I can help you or you can help me!
                 </p>
               </div>
               <div className="buttons">
@@ -67,14 +65,14 @@ const Home = () => {
               <div className="info">
                 <ul>
                   <li>
-                    <a href="tel:+77 022 444 05 05">+77 022 444 05 05</a>
+                    <a>Naman Singh</a>
                   </li>
                   <li>
-                    <a href="mailto:support@elisc.com">support@elisc.com</a>
+                    <a href="mailto:naman@vt.edu">naman@vt.edu</a>
                   </li>
                   <li>
                     <a className="href_location" href="#">
-                      Ave Street Avenue, New York
+                      San Francisco, CA
                     </a>
                   </li>
                 </ul>

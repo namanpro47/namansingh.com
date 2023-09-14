@@ -4,8 +4,15 @@ import Home from "@/src/components/Home";
 import Portfolio from "@/src/components/Portfolio";
 import Service from "@/src/components/Service";
 import AboutMe from "@/src/components/about/AboutMe";
+import { context } from "@/src/context/context";
 import Layout from "@/src/layout/Layout";
+import { useContext, useEffect } from "react";
 const Index = () => {
+  const { animationChnage } = useContext(context);
+  useEffect(() => {
+    animationChnage(null);
+  }, []);
+
   return (
     <Layout>
       {/* HOME */}
