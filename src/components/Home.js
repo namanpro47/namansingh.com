@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setText(text < homeData.skills.length - 1 ? text + 1 : 0);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   });
   const { navChange } = useContext(context);
