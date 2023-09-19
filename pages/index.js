@@ -4,6 +4,7 @@ import Home from "@/src/components/Home";
 import Portfolio from "@/src/components/Portfolio";
 import Service from "@/src/components/Service";
 import AboutMe from "@/src/components/about/AboutMe";
+import Experience from "@/src/components/about/Experience";
 import { context } from "@/src/context/context";
 import Layout from "@/src/layout/Layout";
 import { useContext, useEffect } from "react";
@@ -19,16 +20,15 @@ const Index = () => {
       <Home />
       {/* /HOME */}
       {/* ABOUT */}
-      <AboutMe />
+      <Experience />
       {/* /ABOUT */}
       {/* SERVICES */}
-      <Service />
+      <Portfolio />
       {/* /SERVICES */}
       {/* PORTFOLIO */}
-      <Portfolio />
+      
       {/* /PORTFOLIO */}
       {/* NEWS */}
-      <Blogs />
       {/* /NEWS */}
       {/* CONTACT */}
       <Contact />

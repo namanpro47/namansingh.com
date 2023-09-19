@@ -2577,8 +2577,8 @@ input[type="button"]{
 .icon-behance:before { content: '\f34e'; } /* '' */
 .icon-google-circles:before { content: '\f351'; } /* '' */
 .icon-vkontakte:before { content: '\f354'; } /* '' */
-.icon-smashing:before { content: '\f357'; } /* '' */
-.icon-comment:before { content: '\f4ac'; } /* '' */
+.-smashing:before { content: '\f357'; } /* '' */
+.-comment:before { content: '\f4ac'; } /* '' */
 .icon-folder-open-empty:before { content: '\f4c2'; } /* '' */
 .icon-calendar:before { content: '\f4c5'; } /* '' */
 .icon-newspaper:before { content: '\f4f0'; } /* '' */

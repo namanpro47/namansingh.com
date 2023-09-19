@@ -1,5 +1,6 @@
 import { context } from "@/src/context/context";
 import { useContext } from "react";
+import SectionContainer from "../SectionContainer";
 
 const experiences = [
   {
@@ -9,16 +10,16 @@ const experiences = [
     company: "GhostMode.ai",
     designation: "Co-Founder",
     description: "Personalized AI for building high-performing LinkedIn posts.",
-    link: "",
+    link: "https://www.ghostmode.ai/",
   },
   {
     id: 2,
     image: "img/experience/1.jpg",
     date: "2023",
     company: "Stellar",
-    designation: "Sr. Software Engineer",
+    designation: "Senior Software Engineer",
     description: "Building Client API Integrations for Real Estate Investment Trusts.",
-    link: "",
+    link: "https://mystellar.com/",
   },
   {
     id: 3,
@@ -26,8 +27,8 @@ const experiences = [
     date: "2022",
     company: "Modern Treasury",
     designation: "Software Engineer",
-    description: "Built the Ledgers product: a source-of-truth database for transactions and balances in financial platforms.",
-    link: "",
+    description: "At Modern Treasury, a Series C FinTech startup for money movement, I built the Ledgers product: a source-of-truth database for transactions and balances in financial platforms.",
+    link: "https://www.moderntreasury.com/products/ledgers",
   },
   {
     id: 4,
@@ -35,8 +36,8 @@ const experiences = [
     date: "2020 - 2022",
     company: "MassApply",
     designation: "Founder / CEO",
-    description: "Platform for job-seekers to easily apply to companies, cold-email recruiters, and track their applications. Since launching, MassApply has amassed over 13,000 users and has helped at least 30 people land job offers.",
-    link: "",
+    description: "Platform for job-seekers to easily apply to companies, cold-email recruiters, and track their applications. Since launching, MassApply has supported 13,000+ total registered users.",
+    link: "https://www.massapply.com/",
   },
   {
     id: 5,
@@ -45,7 +46,7 @@ const experiences = [
     company: "Opendoor",
     designation: "Software Engineer",
     description: "As part of the ML Infra team for Opendoor's home valuation model, I simplified the home value bulk predictions pipeline by consolidating multiple Airflow & Spark based-ETLs.",
-    link: "",
+    link: "https://www.opendoor.com/",
   },
   {
     id: 6,
@@ -54,13 +55,14 @@ const experiences = [
     company: "Reddit",
     designation: "Software Engineer",
     description: "Worked on the Ads & Monetization team to implement a bid suggestions feature and create a new forecasting service for Reddit’s ad-serving platform. I worked with Python, Thrift, and Airflow.",
-    link: "",
+    link: "https://www.redditforbusiness.com/advertise",
   },
 ];
 
 const Experience = () => {
   const { modalToggle, setexperienceModal } = useContext(context);
   return (
+    <SectionContainer name="experience">
     <div className="elisc_tm_experience">
       <div className="tm_content">
         <div className="elisc_tm_title">
@@ -79,7 +81,8 @@ const Experience = () => {
                 <div className="list_inner">
                   <div className="short">
                     <div className="job">
-                      <h3>{experience.company}</h3>
+                      
+                      <h3>{experience.company}{" "}<i className="icon-link" /></h3>
                       <span className="yellowColor">{experience.date}</span>
                     </div>
                     <div className="place">
@@ -93,12 +96,8 @@ const Experience = () => {
                   </div>
                   <a
                     className="elisc_tm_full_link"
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      modalToggle(true);
-                      setexperienceModal(experience);
-                    }}
+                    href={experience.link}
+                    target="_blank"
                   />
                 </div>
               </li>
@@ -107,6 +106,7 @@ const Experience = () => {
         </div>
       </div>
     </div>
+    </SectionContainer>
   );
 };
 export default Experience;

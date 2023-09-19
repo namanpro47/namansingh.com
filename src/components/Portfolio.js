@@ -264,81 +264,38 @@ const Portfolio = () => {
                 </div>
               </SwiperSlide>
             </Swiper>
-            <div className="elisc_tm_button" data-position="center">
-              <a href="#">View all projects</a>
-            </div>
           </div>
-        </div>
-      </div>
-      {/* PARTNERS */}
-      <div className="elisc_tm_partners">
-        <div className="tm_content">
-          <div className="elisc_tm_title">
-            <span>- Clients</span>
-            <h3>Customers &amp; clients</h3>
-          </div>
-          <div className="partners_inner">
+          <div className="elisc_tm_counter">
             <ul>
               <li>
                 <div className="list_inner">
-                  <img src="img/partners/1.png" alt="image" />
-                  <a className="elisc_tm_full_link" href="#" />
+                  <h3>10+</h3>
+                  <span>Years of Experience</span>
                 </div>
               </li>
               <li>
                 <div className="list_inner">
-                  <img src="img/partners/2.png" alt="image" />
-                  <a className="elisc_tm_full_link" href="#" />
+                  <h3>50+</h3>
+                  <span>Projects Completed</span>
                 </div>
               </li>
               <li>
                 <div className="list_inner">
-                  <img src="img/partners/3.png" alt="image" />
-                  <a className="elisc_tm_full_link" href="#" />
-                </div>
-              </li>
-              <li>
-                <div className="list_inner">
-                  <img src="img/partners/4.png" alt="image" />
-                  <a className="elisc_tm_full_link" href="#" />
-                </div>
-              </li>
-              <li>
-                <div className="list_inner">
-                  <img src="img/partners/5.png" alt="image" />
-                  <a className="elisc_tm_full_link" href="#" />
-                </div>
-              </li>
-              <li>
-                <div className="list_inner">
-                  <img src="img/partners/6.png" alt="image" />
-                  <a className="elisc_tm_full_link" href="#" />
-                </div>
-              </li>
-              <li>
-                <div className="list_inner">
-                  <img src="img/partners/7.png" alt="image" />
-                  <a className="elisc_tm_full_link" href="#" />
-                </div>
-              </li>
-              <li>
-                <div className="list_inner">
-                  <img src="img/partners/8.png" alt="image" />
-                  <a className="elisc_tm_full_link" href="#" />
+                  <h3>30+</h3>
+                  <span>Happy Clients</span>
                 </div>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      {/* /PARTNERS */}
       {/* TESTIMONIALS */}
       <div className="elisc_tm_testimonial_wrapper">
         <div className="tm_content">
           <div className="elisc_tm_testimonials">
             <div className="elisc_tm_title" data-position="center">
-              <span>- Testimonial</span>
-              <h3>What client's say?</h3>
+              <span>- References</span>
+              <h3>What do my Coworkers think?</h3>
             </div>
             <div className="testimonials_list">
               <Swiper
@@ -418,6 +375,16 @@ const Portfolio = () => {
         </div>
       </div>
       {/* /TESTIMONIALS */}
+      {/* PARTNERS */}
+      <div className="elisc_tm_partners">
+        <div className="tm_content">
+          <div className="elisc_tm_title">
+
+          </div>
+          
+        </div>
+      </div>
+      {/* /PARTNERS */}
     </SectionContainer>
   );
 };

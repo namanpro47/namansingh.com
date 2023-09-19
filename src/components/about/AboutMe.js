@@ -6,6 +6,7 @@ const AboutMe = () => {
   const { navChange } = useContext(context);
   return (
     <SectionContainer name="about">
+      <Experience />
       <div className="elisc_tm_about">
         <div className="tm_content">
           <div className="elisc_tm_biography">
@@ -100,7 +101,6 @@ const AboutMe = () => {
             </ul>
           </div>
         </div>
-        <Experience />
       </div>
     </SectionContainer>
   );
