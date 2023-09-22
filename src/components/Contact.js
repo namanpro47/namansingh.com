@@ -48,27 +48,25 @@ const Contact = () => {
           <div className="wrapper">
             <div className="left">
               <div className="elisc_tm_title">
-                <span>- Let's Connect</span>
+                <span>- Contact</span>
                 <h3>Get in touch</h3>
               </div>
               <div className="text">
                 <p>
-                  I'm currently avaliable to take on new projects, so feel free
-                  to send me a message about anything that you want to run past
-                  me. You can contact anytime at 24/7
+                  I'm currently growing my experience as a software engineer and tinkering on startup ideas. Feel free to reach me for potential business opportunities!
                 </p>
               </div>
               <div className="info">
                 <ul>
                   <li>
-                    <a href="tel:+77 022 444 05 05">+77 022 444 05 05</a>
+                    <i className="icon-linkedin-2"/> <a href="tel:+77 022 444 05 05">Connect on LinkedIn</a>
                   </li>
                   <li>
-                    <a href="mailto:support@elisc.com">support@elisc.com</a>
+                    <i className="icon-mail-3"/> <a href="mailto:naman@vt.edu">naman@vt.edu</a>
                   </li>
                   <li>
-                    <a className="href_location" href="#">
-                      Ave Street Avenue, New York
+                    <i className="icon-location"/> <a className="href_location">
+                      San Francisco, California
                     </a>
                   </li>
                 </ul>

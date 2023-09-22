@@ -149,18 +149,18 @@ const Sidebar = () => {
             <div className="social">
               <ul>
                 <li>
-                  <a href="#">
-                    <i className="icon-facebook-1" />
+                  <a href="https://www.linkedin.com/in/namansingh/" target="_blank">
+                    <i className="icon-linkedin-1" />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="https://twitter.com/NamanSinghTech" target="_blank">
                     <i className="icon-twitter-1" />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
-                    <i className="icon-linkedin-1" />
+                  <a href="https://www.youtube.com/@Naman_Singh" target="_blank">
+                    <i className="icon-youtube-play" />
                   </a>
                 </li>
               </ul>

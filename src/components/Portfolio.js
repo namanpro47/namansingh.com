@@ -270,20 +270,20 @@ const Portfolio = () => {
             <ul>
               <li>
                 <div className="list_inner">
-                  <h3>10+</h3>
-                  <span>Years of Experience</span>
+                  <h3>8+</h3>
+                  <span>Years of Dev Experience</span>
                 </div>
               </li>
               <li>
                 <div className="list_inner">
-                  <h3>50+</h3>
-                  <span>Projects Completed</span>
+                  <h3>4+</h3>
+                  <span>Startups Built</span>
                 </div>
               </li>
               <li>
                 <div className="list_inner">
-                  <h3>30+</h3>
-                  <span>Happy Clients</span>
+                  <h3>18,000+</h3>
+                  <span>Happy Customers</span>
                 </div>
               </li>
             </ul>

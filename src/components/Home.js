@@ -49,8 +49,8 @@ const Home = () => {
               </div>
               <div className="buttons">
                 <div className="elisc_tm_button transition_link">
-                  <a href="#portfolio" onClick={() => navChange("portfolio")}>
-                    Got a project?
+                  <a href="https://www.linkedin.com/in/namansingh/" target="_blank">
+                  Connect on LinkedIn <i className="icon-linkedin-2" />
                   </a>
                 </div>
                 <div
@@ -58,7 +58,7 @@ const Home = () => {
                   data-style="border"
                 >
                   <a href="#contact" onClick={() => navChange("contact")}>
-                    Let's talk
+                    Email Me <i className="icon-mail-3" />
                   </a>
                 </div>
               </div>
@@ -71,7 +71,7 @@ const Home = () => {
                     <a href="mailto:naman@vt.edu">naman@vt.edu</a>
                   </li>
                   <li>
-                    <a className="href_location" href="#">
+                    <a className="href_location">
                       San Francisco, CA
                     </a>
                   </li>
