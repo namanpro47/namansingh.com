@@ -26,7 +26,7 @@ export const sliderProps = {
     speed: 500,
     rewind: true,
     autoplay: {
-      delay: 2500,
+      delay: 4000,
     },
     navigation: {
       nextEl: ".next_button",
@@ -53,7 +53,7 @@ export const sliderProps = {
     speed: 500,
     rewind: true,
     autoplay: {
-      delay: 2500,
+      delay: 6000,
     },
     pagination: {
       el: ".owl-dots",

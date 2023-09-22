@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { context } from "../context/context";
 import { sliderProps } from "../sliderProps";
 import SectionContainer from "./SectionContainer";
+
 const Portfolio = () => {
   const { setPortfolioModal, modalToggle } = useContext(context);
   return (
@@ -295,7 +296,7 @@ const Portfolio = () => {
           <div className="elisc_tm_testimonials">
             <div className="elisc_tm_title" data-position="center">
               <span>- References</span>
-              <h3>What do my Coworkers think?</h3>
+              <h3>What do my Colleagues think?</h3>
             </div>
             <div className="testimonials_list">
               <Swiper
@@ -305,10 +306,7 @@ const Portfolio = () => {
                 <SwiperSlide>
                   <div className="text">
                     <p>
-                      I rarely like to write reviews, but the Marketify team
-                      truly deserve a standing ovation for their customer
-                      support, customisation and most importantly, friendliness
-                      and professionalism.
+                    Naman is a strong, product-minded engineer, as he demonstrated during his time on the Ledgers engineering team at Modern Treasury. I was especially impressed by Naman’s customer and business focus.  Naman is a great asset to any team that values full-stack web development knowledge and customer empathy.
                     </p>
                   </div>
                   <div className="short">
@@ -319,18 +317,16 @@ const Portfolio = () => {
                       />
                     </div>
                     <div className="detail">
-                      <h3>John Doe</h3>
+                      <h3>Matthew McNierney</h3>
                     </div>
                   </div>
-                  <p className="job">User Interface Design at PCL Lab</p>
+                  <p className="job">Engineering Manager at Modern Treasury</p>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div className="text">
                     <p>
-                      Really the Code Quality, Customer Support, and design are
-                      awesome and its good support they are giving. They give an
-                      instant solution to our needs. Really awesome. I will
-                      strongly recommend to my friends.
+                    Naman was thrown into an environment where he had to rapidly ramp up. With his patience and willingness to learn, he was able to deliver business impact on a critical path service even amidst all the new context.
+                    I'm excited to see what the future holds for Naman!
                     </p>
                   </div>
                   <div className="short">
@@ -341,18 +337,15 @@ const Portfolio = () => {
                       />
                     </div>
                     <div className="detail">
-                      <h3>Keita Smith</h3>
+                      <h3>Daniel Zhang</h3>
                     </div>
                   </div>
-                  <p className="job">Senior Designer at Behance</p>
+                  <p className="job">Engineering Manager at Opendoor</p>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div className="text">
                     <p>
-                      Loved the template design, documentation, customizability
-                      and the customer support from Marketify team! I am a noob
-                      in programming but the Marketify team helped me
-                      successfully.
+                      I had a blast co-founding MassApply together with Naman. I'm impressed by how he engineered the platform from scratch as our sole engineer, while also relentlessly improving our user growth and product success as CEO. I'd gladly work with Naman again in our next startup!
                     </p>
                   </div>
                   <div className="short">
@@ -363,10 +356,10 @@ const Portfolio = () => {
                       />
                     </div>
                     <div className="detail">
-                      <h3>Alan Walker</h3>
+                      <h3>Sana Ahmad</h3>
                     </div>
                   </div>
-                  <p className="job">Sales Manager at Vivaco Shop</p>
+                  <p className="job">Co-Founder & COO of MassApply</p>
                 </SwiperSlide>
                 <div className="owl-dots"></div>
               </Swiper>
