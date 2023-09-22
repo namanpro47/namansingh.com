@@ -49,7 +49,7 @@ const Contact = () => {
             <div className="left">
               <div className="elisc_tm_title">
                 <span>- Contact</span>
-                <h3>Get in touch</h3>
+                <h3>Get In Touch</h3>
               </div>
               <div className="text">
                 <p>
@@ -138,32 +138,13 @@ const Contact = () => {
           <div className="elisc_tm_map">
             <div className="mapouter">
               <div className="gmap_canvas">
-                <iframe
+                <img
                   width="100%"
-                  height={375}
-                  id="gmap_canvas"
-                  src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  src="img/header-bg-crop.png"
                   frameBorder={0}
                   scrolling="no"
                   marginHeight={0}
                   marginWidth={0}
-                />
-                <a href="https://www.embedgooglemap.net/blog/divi-discount-code-elegant-themes-coupon" />
-                <br />
-                <style
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      ".mapouter{position:relative;text-align:right;height:375px;width:100%;}",
-                  }}
-                />
-                <a href="https://www.embedgooglemap.net">
-                  how to add google map
-                </a>
-                <style
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      ".gmap_canvas {overflow:hidden;background:none!important;height:375px;width:100%;}",
-                  }}
                 />
               </div>
             </div>
