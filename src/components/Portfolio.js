@@ -33,7 +33,7 @@ const Portfolio = () => {
                     <div className="main" data-img-url="img/portfolio/ghostmode.png" />
                     <a
                       className="elisc_tm_full_link popup-youtube"
-                      href="https://www.youtube.com/watch?v=7e90gBu4pas"
+                      href="https://www.youtube.com/watch?v=eq3MPtI6KWg"
                     />
                   </div>
                   <div className="details">
@@ -43,7 +43,7 @@ const Portfolio = () => {
                     <h3 className="title">
                       <a
                         className="line_effect popup-youtube"
-                        href="https://www.youtube.com/watch?v=7e90gBu4pas"
+                        href="https://www.youtube.com/watch?v=eq3MPtI6KWg"
                       >
                         GhostMode.ai
                       </a>
@@ -57,8 +57,8 @@ const Portfolio = () => {
                     <img src="img/thumbs/31-36.jpg" alt="image" />
                     <div className="main" data-img-url="img/portfolio/home.png" />
                     <a
-                      className="elisc_tm_full_link popup-vimeo"
-                      href="https://vimeo.com/337293658"
+                      className="elisc_tm_full_link popup-youtube"
+                      href="https://www.youtube.com/watch?v=Hl8z_viVL_4"
                     />
                   </div>
                   <div className="details">
@@ -67,8 +67,8 @@ const Portfolio = () => {
                     </span>
                     <h3 className="title">
                       <a
-                        className="line_effect popup-vimeo"
-                        href="https://vimeo.com/337293658"
+                        className="line_effect popup-youtube"
+                        href="https://www.youtube.com/watch?v=Hl8z_viVL_4"
                       >
                         MassApply.com
                       </a>
