@@ -12,8 +12,8 @@ const Portfolio = () => {
         <div className="tm_content">
           <div className="elisc_tm_portfolio_title">
             <div className="elisc_tm_title">
-              <span>- Projects</span>
-              <h3>Recent completed works</h3>
+              <span>- Portfolio</span>
+              <h3>Startups I've Founded</h3>
             </div>
             <div className="buttons">
               <a className="prev_button" href="#">
@@ -30,7 +30,7 @@ const Portfolio = () => {
                 <div className="list_inner">
                   <div className="image">
                     <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/1.jpg" />
+                    <div className="main" data-img-url="img/portfolio/ghostmode.png" />
                     <a
                       className="elisc_tm_full_link popup-youtube"
                       href="https://www.youtube.com/watch?v=7e90gBu4pas"
@@ -38,14 +38,14 @@ const Portfolio = () => {
                   </div>
                   <div className="details">
                     <span className="category">
-                      <a href="#">Youtube</a>
+                      <a href="#">Launching soon!</a>
                     </span>
                     <h3 className="title">
                       <a
                         className="line_effect popup-youtube"
                         href="https://www.youtube.com/watch?v=7e90gBu4pas"
                       >
-                        New Technology
+                        GhostMode.ai
                       </a>
                     </h3>
                   </div>
@@ -55,7 +55,7 @@ const Portfolio = () => {
                 <div className="list_inner">
                   <div className="image">
                     <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/2.jpg" />
+                    <div className="main" data-img-url="img/portfolio/home.png" />
                     <a
                       className="elisc_tm_full_link popup-vimeo"
                       href="https://vimeo.com/337293658"
@@ -63,14 +63,14 @@ const Portfolio = () => {
                   </div>
                   <div className="details">
                     <span className="category">
-                      <a href="#">Vimeo</a>
+                      <a href="#">13,000+ Users & $30k Awarded</a>
                     </span>
                     <h3 className="title">
                       <a
                         className="line_effect popup-vimeo"
                         href="https://vimeo.com/337293658"
                       >
-                        Firogo Majestic Ltd.
+                        MassApply.com
                       </a>
                     </h3>
                   </div>
@@ -80,7 +80,7 @@ const Portfolio = () => {
                 <div className="list_inner">
                   <div className="image">
                     <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/3.jpg" />
+                    <div className="main" data-img-url="img/portfolio/postgenmock.png" />
                     <a
                       className="elisc_tm_full_link soundcloude_link mfp-iframe audio"
                       href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/471954807&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
@@ -88,14 +88,14 @@ const Portfolio = () => {
                   </div>
                   <div className="details">
                     <span className="category">
-                      <a href="#">Soundcloud</a>
+                      <a href="#">12 Monthly Paying Enterprise Customers</a>
                     </span>
                     <h3 className="title">
                       <a
                         className="line_effect soundcloude_link mfp-iframe audio"
                         href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/471954807&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
                       >
-                        Creative Building
+                        PostGen.io
                       </a>
                     </h3>
                   </div>
@@ -105,7 +105,7 @@ const Portfolio = () => {
                 <div className="list_inner">
                   <div className="image">
                     <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/4.jpg" />
+                    <div className="main" data-img-url="img/portfolio/trumpbump2.jpg" />
                     <a
                       className="elisc_tm_full_link portfolio_popup"
                       href="#"
@@ -126,7 +126,7 @@ const Portfolio = () => {
                           setPortfolioModal(true);
                         }}
                       >
-                        Modalbox
+                        4,000+ App Downloads
                       </a>
                     </span>
                     <h3 className="title">
@@ -139,126 +139,7 @@ const Portfolio = () => {
                           setPortfolioModal(true);
                         }}
                       >
-                        Beautiful Boat
-                      </a>
-                    </h3>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="list_inner">
-                  <div className="image">
-                    <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/1.jpg" />
-                    <a
-                      className="elisc_tm_full_link popup-youtube"
-                      href="https://www.youtube.com/watch?v=7e90gBu4pas"
-                    />
-                  </div>
-                  <div className="details">
-                    <span className="category">
-                      <a href="#">Youtube</a>
-                    </span>
-                    <h3 className="title">
-                      <a
-                        className="line_effect popup-youtube"
-                        href="https://www.youtube.com/watch?v=7e90gBu4pas"
-                      >
-                        New Technology
-                      </a>
-                    </h3>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="list_inner">
-                  <div className="image">
-                    <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/2.jpg" />
-                    <a
-                      className="elisc_tm_full_link popup-vimeo"
-                      href="https://vimeo.com/337293658"
-                    />
-                  </div>
-                  <div className="details">
-                    <span className="category">
-                      <a href="#">Vimeo</a>
-                    </span>
-                    <h3 className="title">
-                      <a
-                        className="line_effect popup-vimeo"
-                        href="https://vimeo.com/337293658"
-                      >
-                        Firogo Majestic Ltd.
-                      </a>
-                    </h3>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="list_inner">
-                  <div className="image">
-                    <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/3.jpg" />
-                    <a
-                      className="elisc_tm_full_link soundcloude_link mfp-iframe audio"
-                      href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/471954807&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-                    />
-                  </div>
-                  <div className="details">
-                    <span className="category">
-                      <a href="#">Soundcloud</a>
-                    </span>
-                    <h3 className="title">
-                      <a
-                        className="line_effect soundcloude_link mfp-iframe audio"
-                        href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/471954807&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-                      >
-                        Creative Building
-                      </a>
-                    </h3>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="list_inner">
-                  <div className="image">
-                    <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/4.jpg" />
-                    <a
-                      className="elisc_tm_full_link portfolio_popup"
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        modalToggle(true);
-                        setPortfolioModal(true);
-                      }}
-                    />
-                  </div>
-                  <div className="details">
-                    <span className="category">
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          modalToggle(true);
-                          setPortfolioModal(true);
-                        }}
-                      >
-                        Modalbox
-                      </a>
-                    </span>
-                    <h3 className="title">
-                      <a
-                        className="line_effect portfolio_popup"
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          modalToggle(true);
-                          setPortfolioModal(true);
-                        }}
-                      >
-                        Beautiful Boat
+                        Naman Mobile Apps
                       </a>
                     </h3>
                   </div>
@@ -276,7 +157,7 @@ const Portfolio = () => {
               </li>
               <li>
                 <div className="list_inner">
-                  <h3>4+</h3>
+                  <h3>4</h3>
                   <span>Startups Built</span>
                 </div>
               </li>
@@ -313,7 +194,7 @@ const Portfolio = () => {
                     <div className="image">
                       <div
                         className="main"
-                        data-img-url="img/testimonials/1.jpg"
+                        data-img-url="img/testimonials/matt_headshot.jpeg"
                       />
                     </div>
                     <div className="detail">
@@ -333,7 +214,7 @@ const Portfolio = () => {
                     <div className="image">
                       <div
                         className="main"
-                        data-img-url="img/testimonials/2.jpg"
+                        data-img-url="img/testimonials/daniel_headshot.jpeg"
                       />
                     </div>
                     <div className="detail">
@@ -352,7 +233,7 @@ const Portfolio = () => {
                     <div className="image">
                       <div
                         className="main"
-                        data-img-url="img/testimonials/3.jpg"
+                        data-img-url="img/testimonials/sana_headshot.jpeg"
                       />
                     </div>
                     <div className="detail">

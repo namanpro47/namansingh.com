@@ -40,7 +40,7 @@ const Sidebar = () => {
         <div className="inner">
           <div className="wrapper">
             <div className="avatar">
-              <div className="image" data-img-url="img/about/1.jpg" />
+              <div className="image" data-img-url="img/new_headshot.png" />
             </div>
             <div className="menu_list">
               <ul className="transition_link">
@@ -121,7 +121,7 @@ const Sidebar = () => {
           <div className="author">
             <div className="image">
               <img src="img/thumbs/1-1.jpg" alt="image" />
-              <div className="main" data-img-url="img/about/1.jpg" />
+              <div className="main" data-img-url="img/new_headshot.png" />
             </div>
             <div className="name">
               <h3>
