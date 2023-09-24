@@ -89,7 +89,7 @@ const Contact = () => {
                   >
                     <span>
                       {error
-                        ? "Please Fill Required Fields"
+                        ? "Sorry, something went wrong. Did you fill out all the required fields?"
                         : "Your message has been received, We will contact you soon."}
                     </span>
                   </div>
