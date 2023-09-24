@@ -159,7 +159,7 @@ const Sidebar = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.youtube.com/@Naman_Singh" target="_blank">
+                  <a href="https://youtube.com/@Naman_Singh" target="_blank">
                     <i className="icon-youtube-play" />
                   </a>
                 </li>

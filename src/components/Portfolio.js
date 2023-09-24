@@ -30,7 +30,7 @@ const Portfolio = () => {
                 <div className="list_inner">
                   <div className="image">
                     <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/ghostmode.png" />
+                    <div className="main" data-img-url="img/portfolio/ghosthome.png" />
                     <a
                       className="elisc_tm_full_link popup-youtube"
                       href="https://www.youtube.com/watch?v=eq3MPtI6KWg"
