@@ -1,6 +1,8 @@
 import emailjs from "emailjs-com";
 import { useState } from "react";
 import SectionContainer from "./SectionContainer";
+import axios from "axios"
+
 const Contact = () => {
   const [mailData, setMailData] = useState({
     name: "",
@@ -11,29 +13,27 @@ const Contact = () => {
   const [error, setError] = useState(null);
   const onChange = (e) =>
     setMailData({ ...mailData, [e.target.name]: e.target.value });
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (name.length === 0 || email.length === 0 || message.length === 0) {
       setError(true);
       clearError();
     } else {
-      emailjs
-        .send(
-          "service_seruhwu", // service id
-          "template_21aw58z", // template id
-          mailData,
-          "Q3pccdLZhU-mZT7tQ" // public api
-        )
-        .then(
-          (response) => {
-            setError(false);
-            clearError();
-            setMailData({ name: "", email: "", message: "" });
-          },
-          (err) => {
-            console.log(err.text);
-          }
-        );
+      try {
+        const response = await axios.post("/api/email", mailData);
+        if (response.data.success) {
+          setError(false);
+          setMailData({ name: "", email: "", message: "" });
+          // You may want to display a success message here.
+        } else {
+          setError(true);
+          // You may want to display an error message here.
+        }
+      } catch (error) {
+        setError(true);
+        console.error("Error sending email:", error);
+        // You may want to display an error message here.
+      }
     }
   };
   const clearError = () => {
