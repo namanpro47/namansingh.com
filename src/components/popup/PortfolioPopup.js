@@ -10,76 +10,40 @@ const PortfolioPopup = () => {
           <img src="img/thumbs/4-2.jpg" alt="image" />
           <div
             className="main"
-            data-img-url="img/portfolio/4.jpg"
-            style={{ backgroundImage: 'url("img/portfolio/4.jpg")' }}
+            data-img-url="img/portfolio/postgenmock.png"
+            style={{ backgroundImage: 'url("img/portfolio/postgenmock.png")' }}
           />
         </div>
         <div className="portfolio_main_title">
           <span className="category">
-            <a href="#">Modalbox</a>
+            <a>12 Monthly Paying Enterprise Customers</a>
           </span>
-          <h3 className="title">Beautiful Boat</h3>
+          <a href="https://www.postgen.io/" target="_blank"><h3 className="title">PostGen.io</h3></a>
         </div>
         <div className="main_details">
           <div className="textbox">
             <p>
-              We live in a world where we need to move quickly and iterate on
-              our ideas as flexibly as possible. Building mockups strikes the
-              ideal balance ease of modification. Building mockups strikes the
-              ideal balance ease of modification.
-            </p>
-            <p>
-              Mockups are useful both for the creative phase of the project -
-              for instance when you're trying to figure out your user flows or
-              the proper visual hierarchy - and the production phase when they
-              phase when they will represent the target product. Building
-              mockups strikes the ideal balance ease of modification.
+            <a href="https://www.postgen.io/" target="_blank">PostGen</a> is a tool that gives you verified emails of people who liked/commented on any LinkedIn post that you specify. I deployed a pipeline that sifts through a combination of web scraping APIs and lead generation tools to deliver a spreadsheet of all relevant contact information.
             </p>
           </div>
           <div className="detailbox">
             <ul>
               <li>
-                <span className="first">Client</span>
-                <span>Alvaro Morata</span>
-              </li>
-              <li>
                 <span className="first">Category</span>
                 <span>
-                  <a href="#">Modalbox</a>
+                  <a href="#">B2B SaaS</a>
                 </span>
               </li>
               <li>
-                <span className="first">Date</span>
-                <span>April 10, 2023</span>
+                <span className="first">Timeline</span>
+                <span>Jan 2022 - May 2022</span>
               </li>
               <li>
-                <span className="first">Share</span>
+                <span className="first">Link</span>
                 <ul className="share">
                   <li>
-                    <a href="#">
-                      <img
-                        className="svg"
-                        src="img/svg/social/facebook.svg"
-                        alt="image"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img
-                        className="svg"
-                        src="img/svg/social/twitter.svg"
-                        alt="image"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img
-                        className="svg"
-                        src="img/svg/social/instagram.svg"
-                        alt="image"
-                      />
+                    <a href="https://www.postgen.io/" target="_blank">
+                      <i className="icon-link" />
                     </a>
                   </li>
                 </ul>
@@ -95,8 +59,8 @@ const PortfolioPopup = () => {
                   <img src="img/thumbs/4-2.jpg" alt="image" />
                   <div
                     className="main"
-                    data-img-url="img/portfolio/5.jpg"
-                    style={{ backgroundImage: 'url("img/portfolio/5.jpg")' }}
+                    data-img-url="img/portfolio/postgen1.png"
+                    style={{ backgroundImage: 'url("img/portfolio/postgen1.png")' }}
                   />
                 </div>
               </div>
@@ -107,8 +71,8 @@ const PortfolioPopup = () => {
                   <img src="img/thumbs/4-2.jpg" alt="image" />
                   <div
                     className="main"
-                    data-img-url="img/portfolio/6.jpg"
-                    style={{ backgroundImage: 'url("img/portfolio/6.jpg")' }}
+                    data-img-url="img/portfolio/pgbanner.png"
+                    style={{ backgroundImage: 'url("img/portfolio/pgbanner.png")' }}
                   />
                 </div>
               </div>
@@ -119,8 +83,8 @@ const PortfolioPopup = () => {
                   <img src="img/thumbs/4-2.jpg" alt="image" />
                   <div
                     className="main"
-                    data-img-url="img/portfolio/7.jpg"
-                    style={{ backgroundImage: 'url("img/portfolio/7.jpg")' }}
+                    data-img-url="img/portfolio/pglogo.png"
+                    style={{ backgroundImage: 'url("img/portfolio/pglogo.png")' }}
                   />
                 </div>
               </div>

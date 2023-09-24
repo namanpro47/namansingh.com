@@ -82,31 +82,6 @@ const Portfolio = () => {
                     <img src="img/thumbs/31-36.jpg" alt="image" />
                     <div className="main" data-img-url="img/portfolio/postgenmock.png" />
                     <a
-                      className="elisc_tm_full_link soundcloude_link mfp-iframe audio"
-                      href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/471954807&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-                    />
-                  </div>
-                  <div className="details">
-                    <span className="category">
-                      <a href="#">12 Monthly Paying Enterprise Customers</a>
-                    </span>
-                    <h3 className="title">
-                      <a
-                        className="line_effect soundcloude_link mfp-iframe audio"
-                        href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/471954807&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-                      >
-                        PostGen.io
-                      </a>
-                    </h3>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="list_inner">
-                  <div className="image">
-                    <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/trumpbump2.jpg" />
-                    <a
                       className="elisc_tm_full_link portfolio_popup"
                       href="#"
                       onClick={(e) => {
@@ -126,7 +101,7 @@ const Portfolio = () => {
                           setPortfolioModal(true);
                         }}
                       >
-                        4,000+ App Downloads
+                        12 Monthly Paying Enterprise Customers
                       </a>
                     </span>
                     <h3 className="title">
@@ -138,6 +113,35 @@ const Portfolio = () => {
                           modalToggle(true);
                           setPortfolioModal(true);
                         }}
+                      >
+                        PostGen.io
+                      </a>
+                    </h3>
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="list_inner">
+                  <div className="image">
+                    <img src="img/thumbs/31-36.jpg" alt="image" />
+                    <div className="main" data-img-url="img/portfolio/trumpbump2.jpg" />
+                    <a
+                      className="elisc_tm_full_link portfolio_popup"
+                      href="#"
+                    />
+                  </div>
+                  <div className="details">
+                    <span className="category">
+                      <a
+                        href="#"
+                      >
+                        4,000+ App Downloads
+                      </a>
+                    </span>
+                    <h3 className="title">
+                      <a
+                        className="line_effect portfolio_popup"
+                        href="#"
                       >
                         Naman Mobile Apps
                       </a>
