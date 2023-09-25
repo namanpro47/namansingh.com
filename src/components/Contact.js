@@ -59,7 +59,7 @@ const Contact = () => {
               <div className="info">
                 <ul>
                   <li>
-                    <i className="icon-linkedin-2"/> <a href="tel:+77 022 444 05 05">Connect on LinkedIn</a>
+                    <i className="icon-linkedin-2"/> <a href="https://www.linkedin.com/in/namansingh/" target="_blank">Connect on LinkedIn</a>
                   </li>
                   <li>
                     <i className="icon-mail-3"/> <a href="mailto:naman@vt.edu">naman@vt.edu</a>
