@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { context } from "../context/context";
 import SectionContainer from "./SectionContainer";
 const homeData = {
-  skills: ["Scrappy Engineer", "Hustling Entrepreneur", "Passionate Creator", "Lifelong Coder"],
+  skills: ["Scrappy Engineer", "Problem Solver", "Passionate Creator", "Lifelong Coder"],
 };
 const Home = () => {
   const [text, setText] = useState(0);

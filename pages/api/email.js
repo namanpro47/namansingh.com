@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   }
 
   const sendGridApiKey = process.env.SENDGRID_API_KEY;
-  const toEmail = 'naman@vt.edu';
+  const toEmail = 'me@namansingh.com';
 
   console.log("about to send email with the following info:")
   console.log(name)
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
           subject: `Naman <> ${name} via NamanSingh.com Contact Form`,
         },
       ],
-      from: { email: "naman@vt.edu", name: "Naman Singh" },
+      from: { email: "me@namansingh.com", name: "Naman Singh" },
       content: [
         {
           type: 'text/plain',
