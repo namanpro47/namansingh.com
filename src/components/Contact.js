@@ -62,7 +62,7 @@ const Contact = () => {
                     <i className="icon-linkedin-2"/> <a href="https://www.linkedin.com/in/namansingh/" target="_blank">Connect on LinkedIn</a>
                   </li>
                   <li>
-                    <i className="icon-mail-3"/> <a href="mailto:naman@vt.edu">naman@vt.edu</a>
+                    <i className="icon-mail-3"/> <a href="mailto:me@namansingh.com">me@namansingh.com</a>
                   </li>
                   <li>
                     <i className="icon-location"/> <a className="href_location">

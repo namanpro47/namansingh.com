@@ -13,7 +13,7 @@ const Portfolio = () => {
           <div className="elisc_tm_portfolio_title">
             <div className="elisc_tm_title">
               <span>- Portfolio</span>
-              <h3>Startups I've Founded</h3>
+              <h3>Favorite Projects</h3>
             </div>
             <div className="buttons">
               <a className="prev_button" href="#">
@@ -38,7 +38,7 @@ const Portfolio = () => {
                   </div>
                   <div className="details">
                     <span className="category">
-                      <a href="#">Launching soon!</a>
+                      <a href="#">GPT-4 🤝 LinkedIn</a>
                     </span>
                     <h3 className="title">
                       <a
@@ -101,7 +101,7 @@ const Portfolio = () => {
                           setPortfolioModal(true);
                         }}
                       >
-                        12 Monthly Paying Enterprise Customers
+                        12 Paying Customers
                       </a>
                     </span>
                     <h3 className="title">

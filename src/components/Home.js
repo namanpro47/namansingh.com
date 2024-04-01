@@ -68,7 +68,7 @@ const Home = () => {
                     <a>Naman Singh</a>
                   </li>
                   <li>
-                    <a href="mailto:naman@vt.edu">naman@vt.edu</a>
+                    <a href="mailto:me@namansingh.com">me@namansingh.com</a>
                   </li>
                   <li>
                     <a className="href_location">
