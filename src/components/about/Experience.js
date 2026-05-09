@@ -6,6 +6,15 @@ const experiences = [
   {
     id: 1,
     image: "img/experience/1.jpg",
+    date: "2024 - 2026",
+    company: "Nooks",
+    designation: "Software Engineer",
+    description: "At Nooks, I'm an early engineer building the AI Sequencing product that automates sales teams' daily workflows. I also built the AI Prospector which uncovers key buying signals on account data.",
+    link: "https://www.nooks.ai/",
+  },
+  {
+    id: 2,
+    image: "img/experience/1.jpg",
     date: "2023 - 2024",
     company: "Stellar",
     designation: "Senior Software Engineer",
@@ -13,7 +22,7 @@ const experiences = [
     link: "https://mystellar.com/",
   },
   {
-    id: 2,
+    id: 3,
     image: "img/experience/2.jpg",
     date: "2022 - 2023",
     company: "Modern Treasury",
@@ -22,7 +31,7 @@ const experiences = [
     link: "https://www.moderntreasury.com/products/ledgers",
   },
   {
-    id: 3,
+    id: 4,
     image: "img/experience/3.jpg",
     date: "2020 - 2022",
     company: "MassApply",
@@ -31,7 +40,7 @@ const experiences = [
     link: "https://www.massapply.com/",
   },
   {
-    id: 4,
+    id: 5,
     image: "img/experience/4.jpg",
     date: "2021",
     company: "Opendoor",
@@ -40,7 +49,7 @@ const experiences = [
     link: "https://www.opendoor.com/",
   },
   {
-    id: 5,
+    id: 6,
     image: "img/experience/1.jpg",
     date: "2020",
     company: "Reddit",
@@ -48,15 +57,15 @@ const experiences = [
     description: "Worked on the Ads & Monetization team to implement a bid suggestions feature and create a new forecasting service for Reddit’s ad-serving platform. I worked with Python, Thrift, and Airflow.",
     link: "https://www.redditforbusiness.com/advertise",
   },
-  {
-    id: 6,
-    image: "img/experience/1.jpg",
-    date: "2019",
-    company: "Oracle",
-    designation: "Software Engineer Intern",
-    description: "Worked on a new blockchain-based payments platform as part of the FinTech team. I built the API application layer for this platform using GraphQL, Golang, and Kubernetes.",
-    link: "https://www.ghostmode.ai/",
-  },
+  // {
+  //   id: 7,
+  //   image: "img/experience/1.jpg",
+  //   date: "2019",
+  //   company: "Oracle",
+  //   designation: "Software Engineer Intern",
+  //   description: "Worked on a new blockchain-based payments platform as part of the FinTech team. I built the API application layer for this platform using GraphQL, Golang, and Kubernetes.",
+  //   link: "https://www.ghostmode.ai/",
+  // },
 ];
 
 const Experience = () => {

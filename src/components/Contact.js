@@ -53,7 +53,7 @@ const Contact = () => {
               </div>
               <div className="text">
                 <p>
-                  I'm currently growing my experience as a software engineer and tinkering on startup ideas. Feel free to reach me for potential business opportunities!
+                  Whether you'd like to collaborate, partner up, or just trade notes — my inbox is open.
                 </p>
               </div>
               <div className="info">

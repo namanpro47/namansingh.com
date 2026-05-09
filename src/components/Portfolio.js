@@ -30,6 +30,31 @@ const Portfolio = () => {
                 <div className="list_inner">
                   <div className="image">
                     <img src="img/thumbs/31-36.jpg" alt="image" />
+                    <div className="main" data-img-url="img/portfolio/home.png" />
+                    <a
+                      className="elisc_tm_full_link popup-youtube"
+                      href="https://www.youtube.com/watch?v=Hl8z_viVL_4"
+                    />
+                  </div>
+                  <div className="details">
+                    <span className="category">
+                      <a href="#">13,000+ Users & $30k Awarded</a>
+                    </span>
+                    <h3 className="title">
+                      <a
+                        className="line_effect popup-youtube"
+                        href="https://www.youtube.com/watch?v=Hl8z_viVL_4"
+                      >
+                        MassApply.com
+                      </a>
+                    </h3>
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="list_inner">
+                  <div className="image">
+                    <img src="img/thumbs/31-36.jpg" alt="image" />
                     <div className="main" data-img-url="img/portfolio/ghosthome.png" />
                     <a
                       className="elisc_tm_full_link popup-youtube"
@@ -55,22 +80,55 @@ const Portfolio = () => {
                 <div className="list_inner">
                   <div className="image">
                     <img src="img/thumbs/31-36.jpg" alt="image" />
-                    <div className="main" data-img-url="img/portfolio/home.png" />
+                    <div className="main" data-img-url="img/portfolio/slopgame.png" />
                     <a
-                      className="elisc_tm_full_link popup-youtube"
-                      href="https://www.youtube.com/watch?v=Hl8z_viVL_4"
+                      className="elisc_tm_full_link"
+                      href="https://slopgame.tv"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     />
                   </div>
                   <div className="details">
                     <span className="category">
-                      <a href="#">13,000+ Users & $30k Awarded</a>
+                      <a href="https://slopgame.tv" target="_blank" rel="noopener noreferrer">AI Image Game</a>
                     </span>
                     <h3 className="title">
                       <a
-                        className="line_effect popup-youtube"
-                        href="https://www.youtube.com/watch?v=Hl8z_viVL_4"
+                        className="line_effect"
+                        href="https://slopgame.tv"
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        MassApply.com
+                        SlopGame.tv
+                      </a>
+                    </h3>
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="list_inner">
+                  <div className="image">
+                    <img src="img/thumbs/31-36.jpg" alt="image" />
+                    <div className="main" data-img-url="img/portfolio/dragonwing.png" />
+                    <a
+                      className="elisc_tm_full_link"
+                      href="https://dragons-beta.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  </div>
+                  <div className="details">
+                    <span className="category">
+                      <a href="https://dragons-beta.vercel.app/" target="_blank" rel="noopener noreferrer">Dragon Flight Simulator</a>
+                    </span>
+                    <h3 className="title">
+                      <a
+                        className="line_effect"
+                        href="https://dragons-beta.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Dragonwind.io
                       </a>
                     </h3>
                   </div>
@@ -155,20 +213,20 @@ const Portfolio = () => {
             <ul>
               <li>
                 <div className="list_inner">
-                  <h3>8+</h3>
+                  <h3>10+</h3>
                   <span>Years of Dev Experience</span>
                 </div>
               </li>
               <li>
                 <div className="list_inner">
-                  <h3>4</h3>
-                  <span>Startups Built</span>
+                  <h3>32,000</h3>
+                  <span>LinkedIn &amp; YouTube Audience</span>
                 </div>
               </li>
               <li>
                 <div className="list_inner">
-                  <h3>18,000+</h3>
-                  <span>Happy Customers</span>
+                  <h3>∞</h3>
+                  <span>Aura</span>
                 </div>
               </li>
             </ul>
