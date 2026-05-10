@@ -1,5 +1,6 @@
 import Blogs from "@/src/components/Blogs";
 import Contact from "@/src/components/Contact";
+import Content from "@/src/components/Content";
 import Home from "@/src/components/Home";
 import Portfolio from "@/src/components/Portfolio";
 import Service from "@/src/components/Service";
@@ -25,11 +26,9 @@ const Index = () => {
       {/* SERVICES */}
       <Portfolio />
       {/* /SERVICES */}
-      {/* PORTFOLIO */}
-      
-      {/* /PORTFOLIO */}
-      {/* NEWS */}
-      {/* /NEWS */}
+      {/* CONTENT */}
+      <Content />
+      {/* /CONTENT */}
       {/* CONTACT */}
       <Contact />
       {/* /CONTACT */}

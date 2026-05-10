@@ -76,6 +76,7 @@ const state = (props) => {
       { id: 1, name: "Home", href: "home" },
       { id: 2, name: "Experience", href: "experience" },
       { id: 3, name: "Portfolio", href: "portfolio" },
+      { id: 4, name: "Content", href: "content" },
       { id: 6, name: "Contact", href: "contact" },
     ],
   };
