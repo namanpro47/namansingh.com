@@ -25,7 +25,14 @@ const VideoPopup_ = ({ close, videoID }) => {
               >
                 ×
               </button>
-              <ReactPlayer url={videoID} playing={true} />
+              <ReactPlayer
+                url={videoID}
+                playing={true}
+                controls={true}
+                width="100%"
+                height="100%"
+                className="elisc_tm_video_player"
+              />
             </div>
           </div>
           <div className="mfp-preloader">Loading...</div>
@@ -44,8 +51,10 @@ const VideoPopup = () => {
       a.forEach((a) => {
         if (
           a.href.includes("www.youtube.com") ||
+          a.href.includes("youtu.be") ||
           a.href.includes("vimeo.com") ||
-          a.href.includes("soundcloud.com")
+          a.href.includes("soundcloud.com") ||
+          a.classList.contains("popup-video")
         ) {
           a.addEventListener("click", (e) => {
             e.preventDefault();
