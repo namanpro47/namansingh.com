@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { context } from "../context/context";
 import SectionContainer from "./SectionContainer";
+import VideoCard from "./VideoCard";
+import { videosData } from "./Content";
 const homeData = {
   skills: ["Scrappy Engineer", "Problem Solver", "Passionate Creator", "Lifelong Coder"],
 };
 const Home = () => {
   const [text, setText] = useState(0);
+  const [heroUnmuted, setHeroUnmuted] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
       setText(text < homeData.skills.length - 1 ? text + 1 : 0);
@@ -79,7 +82,18 @@ const Home = () => {
               </div>
             </div>
             <div className="right">
-              <img src="img/Naman-transparent.png" alt="image" />
+              <div className="elisc_tm_videos elisc_tm_hero_video">
+                <div className="videos_list">
+                  <ul>
+                    <VideoCard
+                      video={videosData[0]}
+                      isUnmuted={heroUnmuted}
+                      onToggleMute={() => setHeroUnmuted((m) => !m)}
+                      showTitle={false}
+                    />
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

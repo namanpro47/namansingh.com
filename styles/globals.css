@@ -387,6 +387,38 @@ html {
   transform: scale(1.02);
 }
 
+/* Hero video: clone of the Featured Content video card, sized to the right column */
+.elisc_tm_home .details .right .elisc_tm_hero_video {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  float: none;
+  animation: fx_float 6s ease-in-out infinite;
+}
+.elisc_tm_home .details .right .elisc_tm_hero_video .videos_list {
+  margin: 0;
+  float: none;
+}
+.elisc_tm_home .details .right .elisc_tm_hero_video .videos_list ul {
+  margin: 0;
+  display: block;
+}
+.elisc_tm_home .details .right .elisc_tm_hero_video .videos_list ul li {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.elisc_tm_home .details .right .elisc_tm_hero_video .videos_list .image {
+  margin-bottom: 0;
+}
+/* Don't lift on hover in the hero — the float animation already moves it,
+   and lifting would expose blank space below. */
+.elisc_tm_home .details .right .elisc_tm_hero_video .videos_list .image:hover {
+  transform: none;
+}
+
 /* Hero buttons: gradient primary + lift + shimmer sweep */
 .elisc_tm_button a {
   vertical-align: middle;
@@ -899,6 +931,18 @@ html {
   .elisc_tm_home::before { opacity: 0.6; }
   .elisc_tm_home .details .right::before { width: 70%; }
   .elisc_tm_counter h3 { font-size: 40px; }
+}
+/* Hide the hero video any time the layout stacks (i.e., when the video would
+   no longer sit beside the text). Matches the 1040px stacking breakpoint in
+   public/css/style.css. */
+@media (max-width: 1040px) {
+  .elisc_tm_home .details .right { display: none !important; }
+  /* The legacy mobile rule sets `flex-direction: column-reverse` on .details to
+     stack the portrait above the text. With the right column hidden, that
+     reversed direction + default `justify-content: flex-start` anchors the
+     remaining content to the bottom of the 100vh container, leaving a tall
+     dead band above it. Flow from the top instead. */
+  .elisc_tm_home .details { flex-direction: column; }
 }
 @media (max-width: 768px) {
   .elisc_tm_home::before,
