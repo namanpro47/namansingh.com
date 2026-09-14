@@ -145,27 +145,71 @@ export const eliscUtilits = {
     });
   },
   smoothScrolling() {
-    window.addEventListener("scroll", () => {
-      const sections = document.querySelectorAll(".elisc_tm_section");
-      const navLi = document.querySelectorAll(".transition_link li");
+    // Highlight the active nav item as the user scrolls.
+    //
+    // The legacy version registered an *unthrottled, non-passive* scroll
+    // listener that ran a `querySelectorAll` and read `offsetTop` /
+    // `clientHeight` from every section on every wheel event. That forces a
+    // synchronous layout per tick and blocks the scroll thread — the visible
+    // symptom is the page "locking" mid-scroll, especially over the heavy
+    // first section. Rewritten with passive listening + rAF throttling +
+    // cached node lists, and the work is skipped if nothing actually changed. */
+    let ticking = false;
+    let lastCurrent = null;
+    let sections = null;
+    let navItems = null;
+
+    const refreshNodeLists = () => {
+      sections = document.querySelectorAll(".elisc_tm_section");
+      navItems = Array.from(
+        document.querySelectorAll(".transition_link li")
+      ).map((li) => {
+        const a = li.getElementsByTagName("a")[0];
+        return { li, href: a ? a.getAttribute("href") : null };
+      });
+    };
+
+    const update = () => {
+      ticking = false;
+      if (!sections || !navItems) refreshNodeLists();
+      // If the DOM has been re-rendered since we cached, refresh.
+      if (
+        !sections.length ||
+        !navItems.length ||
+        !document.contains(sections[0])
+      ) {
+        refreshNodeLists();
+      }
+      const y = window.pageYOffset;
       let current = "";
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - sectionHeight / 3) {
-          current = section.getAttribute("id");
-        }
-      });
-      navLi.forEach((li) => {
-        if (current !== null) {
-          li.classList.remove("active");
-        }
-        if (
-          li.getElementsByTagName("a")[0].getAttribute("href") == `#${current}`
-        ) {
-          li.classList.add("active");
-        }
-      });
-    });
+      // Reading offsetTop/clientHeight forces layout, but doing it once per
+      // animation frame instead of per scroll event keeps the cost bounded.
+      for (let i = 0; i < sections.length; i++) {
+        const s = sections[i];
+        const top = s.offsetTop;
+        const h = s.clientHeight;
+        if (y >= top - h / 3) current = s.getAttribute("id");
+      }
+      if (current === lastCurrent) return;
+      lastCurrent = current;
+      for (let i = 0; i < navItems.length; i++) {
+        const { li, href } = navItems[i];
+        if (href === `#${current}`) li.classList.add("active");
+        else li.classList.remove("active");
+      }
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    // passive: true tells the browser the listener won't preventDefault, so
+    // it can keep scrolling smoothly on the compositor thread without waiting
+    // for our handler to run.
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // Prime once so the initial section gets highlighted.
+    update();
   },
 };

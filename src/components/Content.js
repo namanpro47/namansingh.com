@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { sliderProps } from "../sliderProps";
 import SectionContainer from "./SectionContainer";
 import VideoCard from "./VideoCard";
+import CountUp from "./CountUp";
 
 export const videosData = [
   {
@@ -81,13 +82,13 @@ const Content = () => {
             <ul>
               <li>
                 <div className="list_inner">
-                  <h3>10+</h3>
+                  <h3><CountUp to={10} suffix="+" /></h3>
                   <span>Years of Dev Experience</span>
                 </div>
               </li>
               <li>
                 <div className="list_inner">
-                  <h3>32,000</h3>
+                  <h3><CountUp to={32000} duration={2000} /></h3>
                   <span>LinkedIn &amp; YouTube Audience</span>
                 </div>
               </li>

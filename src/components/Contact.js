@@ -49,7 +49,15 @@ const Contact = () => {
             <div className="left">
               <div className="elisc_tm_title">
                 <span>- Contact</span>
-                <h3>Get In Touch</h3>
+                <h3>
+                  Get In Touch
+                  <span
+                    className="ns_open_pill"
+                    aria-label="Currently open to new conversations"
+                  >
+                    Open to Chat
+                  </span>
+                </h3>
               </div>
               <div className="text">
                 <p>

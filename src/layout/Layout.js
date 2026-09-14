@@ -3,6 +3,7 @@ import ExperiencePopup from "@/src/components/popup/ExperiencePopup";
 import PortfolioPopup from "@/src/components/popup/PortfolioPopup";
 import ServicePopup from "@/src/components/popup/ServicePopup";
 import VideoPopup from "@/src/components/popup/VideoPopup";
+import SiteFlair from "@/src/components/SiteFlair";
 import { context } from "@/src/context/context";
 import Sidebar from "@/src/layout/Sidebar";
 import { eliscUtilits } from "@/src/utilits";
@@ -47,6 +48,7 @@ const Layout = ({ children }) => {
         {/* /CURSOR */}
       </div>
       <div className="elisc_fn_moving_box"></div>
+      <SiteFlair />
     </Fragment>
   );
 };

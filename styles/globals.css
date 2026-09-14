@@ -51,6 +51,23 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+/* The legacy stylesheet sets `body { overflow-x: hidden }`. Per the CSS spec,
+   setting either overflow-x or overflow-y to a non-visible value while the
+   other is `visible` causes the visible one to compute to `auto` — which
+   silently turns the body into a scroll container in addition to <html>.
+   The browser then routes wheel input to <body>, whose scroll range is
+   constrained by its own clientHeight; after a few pixels of body scroll,
+   further wheel input is absorbed and the page feels "locked." Letting <html>
+   be the sole scroll container by restoring body to overflow: visible.
+
+   `display: flow-root` is added because the body's primary child
+   (`.elisc_tm_mainpart`) is `float: left`; without a BFC, body collapses to
+   0 height and the page renders as a tiny gradient strip in the corner. */
+body {
+  overflow: visible !important;
+  display: flow-root;
 }
 
 .elisc_tm_button input[type="submit"] {
@@ -549,17 +566,26 @@ html {
   box-shadow: var(--shadow-card-lift);
 }
 .elisc_tm_counter h3 {
-  background: linear-gradient(135deg, #130f49 0%, #5a4fcf 60%, #ff972d 130%);
-  -webkit-background-clip: text;
-          background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  font-size: 48px;
-  letter-spacing: -1px;
+  color: #5a4fcf;
+  /* Scales with the viewport so "32,000" never spills out of its card;
+     caps at 72px on wide screens. */
+  font-size: clamp(44px, 4.6vw, 72px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -2px;
+  margin-bottom: 14px;
 }
 .elisc_tm_counter span {
   letter-spacing: 1px;
-  font-size: 13px;
+  font-size: 15px;
+}
+/* The animated digits live in a <span> inside the h3, so the label rules
+   above (and the Karla/uppercase rule in public/css/style.css) would shrink
+   them to 13px. Force them back to the heading's font. */
+.elisc_tm_counter h3 .ns_countup {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
 }
 
 /* ---------- PORTFOLIO CARDS ---------- */
@@ -926,11 +952,29 @@ html {
   border-radius: 999px;
 }
 
+/* One-page mode: the legacy `.elisc_tm_section { overflow-y: scroll }` rule
+   makes each section its own scroll container, which is what the template's
+   multi-page mode needs. In one-page mode (this site) we want the whole
+   document to be one continuous scroll, with no internal scroll anywhere.
+
+   Using `display: flow-root` rather than `overflow: visible` because every
+   section's primary child is `float: left` (legacy template convention), and
+   plain `overflow: visible` does not clear floats — sections collapsed to
+   0 height and the document scrolled past collapsed boxes, which the
+   browser was rendering as awkward "scroll stops" in the carousel area.
+   `flow-root` establishes a block formatting context: floats clear, the
+   section box grows to fit its content, and nothing scrolls internally. */
+.dodo_tm_one_page_wrapper .elisc_tm_section {
+  display: flow-root;
+  overflow: visible;
+  overflow-y: visible;
+}
+
 /* ---------- responsive tweaks ---------- */
 @media (max-width: 1040px) {
   .elisc_tm_home::before { opacity: 0.6; }
   .elisc_tm_home .details .right::before { width: 70%; }
-  .elisc_tm_counter h3 { font-size: 40px; }
+  .elisc_tm_counter h3 { font-size: 56px; letter-spacing: -1px; }
 }
 /* Hide the hero video any time the layout stacks (i.e., when the video would
    no longer sit beside the text). Matches the 1040px stacking breakpoint in
@@ -951,3 +995,667 @@ html {
     background: linear-gradient(180deg, #effbf8 0%, #f4f7ff 100%);
   }
 }
+
+/* =====================================================================
+   PERSONALITY LAYER — overhaul: cursor blob, scroll progress, status
+   widget, marquees, hero shapes, tilt cards, timeline rail, confetti.
+   Everything namespaced ns_* so it doesn't collide with the legacy
+   template (elisc_*, dodo_*) — easy to maintain.
+   ===================================================================== */
+
+/* ---------- shared keyframes ---------- */
+@keyframes ns_pulse_dot {
+  0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+  70%  { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+@keyframes ns_drift_a {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50%      { transform: translate(20px, -16px) rotate(8deg); }
+}
+@keyframes ns_drift_b {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50%      { transform: translate(-22px, 18px) rotate(-10deg); }
+}
+@keyframes ns_drift_c {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50%      { transform: translate(14px, 22px) rotate(14deg) scale(1.1); }
+}
+@keyframes ns_spin_slow { to { transform: rotate(360deg); } }
+@keyframes ns_wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+}
+@keyframes ns_scroll_cue {
+  0%   { transform: translateY(0); opacity: 1; }
+  60%  { transform: translateY(18px); opacity: 0.4; }
+  100% { transform: translateY(28px); opacity: 0; }
+}
+@keyframes ns_swirl_draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes ns_spark {
+  to {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
+  }
+}
+@keyframes ns_confetti {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% {
+    transform: translate(var(--dx), calc(var(--dy) + 100vh)) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+@keyframes ns_xp_in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* ---------- scroll progress bar ---------- */
+.ns_progress_bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 1000;
+  background: linear-gradient(90deg, #ff5e7e, #ff972d 35%, #ffd166 55%, #5ad1d9 75%, #5a4fcf);
+  background-size: 200% 100%;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+  box-shadow: 0 1px 12px rgba(255, 94, 126, 0.45);
+  animation: fx_gradient_pan 6s ease-in-out infinite;
+}
+
+/* ---------- mouse-aware spotlight (sits between content and cursor dots) ---------- */
+.ns_cursor_spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(165, 166, 255, 0.18),
+    rgba(255, 151, 45, 0.10) 40%,
+    transparent 65%
+  );
+  transition: opacity 0.3s ease;
+}
+@media (pointer: coarse) {
+  .ns_cursor_spotlight, .ns_cursor_trail { display: none; }
+}
+
+.ns_cursor_trail {
+  position: fixed;
+  top: 0; left: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(circle, rgba(255, 94, 126, 0.55), rgba(255, 151, 45, 0.25) 50%, transparent 70%);
+  filter: blur(2px);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* ---------- click sparkles + konami confetti host ---------- */
+#ns_fx_layer {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+.ns_spark {
+  position: fixed;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(0, 0) scale(1);
+  animation: ns_spark 600ms cubic-bezier(.2,.8,.2,1) forwards;
+  box-shadow: 0 0 8px currentColor;
+}
+.ns_confetti {
+  position: fixed;
+  width: 10px; height: 14px;
+  border-radius: 2px;
+  pointer-events: none;
+  animation: ns_confetti 1500ms cubic-bezier(.2,.6,.3,1) forwards;
+  will-change: transform, opacity;
+}
+
+/* ---------- HERO additions ---------- */
+.elisc_tm_home .tm_content {
+  --px: 0;
+  --py: 0;
+}
+
+/* waving hand */
+.ns_wave {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 0.6em; /* 👋 emoji renders relative to the h3 — scale down */
+  line-height: 1;
+  vertical-align: -2px;
+  transform-origin: 70% 70%;
+  animation: ns_wave 2.6s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+/* gradient text on "SF" */
+.ns_underline_swirl {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #5a4fcf 0%, #a5a6ff 50%, #ff972d 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: fx_gradient_pan 8s ease-in-out infinite;
+}
+
+/* video tilt wrapper for hero */
+.ns_video_tilt {
+  position: relative;
+  width: 100%;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+.ns_video_tilt > .elisc_tm_videos.elisc_tm_hero_video {
+  transform: rotateX(var(--vrx, 0deg)) rotateY(var(--vry, 0deg));
+  transition: transform 0.45s cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+}
+
+/* decorative shapes that drift on parallax */
+.ns_hero_shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.ns_hero_shapes .ns_shape {
+  position: absolute;
+  display: inline-block;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(.2,.8,.2,1);
+}
+.ns_shape--ring {
+  /* Moved out of the title's reading area (was top: 12%; left: 8%, which
+     overlapped "Hey, I'm Naman!"). Now floats in the dead space between the
+     top of the hero and the right-side video card. */
+  top: 6%; right: 4%;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  border: 3px dashed rgba(90, 79, 207, 0.35);
+  animation: ns_drift_a 12s ease-in-out infinite, ns_spin_slow 40s linear infinite;
+  transform: translate(calc(var(--px, 0) * 22px), calc(var(--py, 0) * 22px));
+}
+.ns_shape--blob {
+  bottom: 14%; left: 22%;
+  width: 110px; height: 110px;
+  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  background: linear-gradient(135deg, rgba(255, 94, 126, 0.55), rgba(255, 151, 45, 0.55));
+  filter: blur(0.4px);
+  opacity: 0.7;
+  animation: ns_drift_b 16s ease-in-out infinite;
+  transform: translate(calc(var(--px, 0) * 30px), calc(var(--py, 0) * 30px));
+}
+.ns_shape--squiggle {
+  top: 22%; right: 10%;
+  width: 130px; height: 32px;
+  color: rgba(90, 209, 217, 0.7);
+  animation: ns_drift_c 14s ease-in-out infinite;
+  transform: translate(calc(var(--px, 0) * 24px), calc(var(--py, 0) * 24px));
+}
+.ns_shape--squiggle svg { width: 100%; height: 100%; }
+.ns_shape--cross {
+  bottom: 18%; right: 14%;
+  width: 30px; height: 30px;
+  color: rgba(255, 209, 102, 0.85);
+  animation: ns_drift_a 10s ease-in-out infinite;
+  transform: translate(calc(var(--px, 0) * 18px), calc(var(--py, 0) * 18px)) rotate(20deg);
+}
+.ns_shape--cross svg { width: 100%; height: 100%; }
+.ns_shape--dot {
+  top: 60%; left: 5%;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #5a4fcf;
+  box-shadow: 0 0 14px rgba(90, 79, 207, 0.55);
+  animation: ns_drift_b 9s ease-in-out infinite;
+  transform: translate(calc(var(--px, 0) * 16px), calc(var(--py, 0) * 16px));
+}
+.ns_shape--triangle {
+  top: 8%; right: 28%;
+  width: 0; height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 22px solid rgba(165, 166, 255, 0.55);
+  animation: ns_drift_c 13s ease-in-out infinite;
+  transform: translate(calc(var(--px, 0) * 20px), calc(var(--py, 0) * 20px));
+}
+@media (max-width: 1040px) {
+  .ns_hero_shapes { display: none; }
+}
+
+/* scroll cue */
+.ns_scroll_cue {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #5a4fcf;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  z-index: 1;
+  opacity: 0.7;
+}
+.ns_scroll_cue_track {
+  width: 18px;
+  height: 28px;
+  border: 1.5px solid rgba(90, 79, 207, 0.55);
+  border-radius: 999px;
+  position: relative;
+}
+.ns_scroll_cue_dot {
+  position: absolute;
+  top: 5px; left: 50%;
+  transform: translateX(-50%);
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #5a4fcf;
+  animation: ns_scroll_cue 1.8s ease-in-out infinite;
+}
+@media (max-width: 1040px) {
+  .ns_scroll_cue { display: none; }
+}
+
+/* ---------- EXPERIENCE: 2-column rounded cards w/ accent + glow ---------- */
+.ns_xp_section {
+  background:
+    radial-gradient(900px 500px at -10% 5%, rgba(165, 166, 255, 0.18), transparent 60%),
+    radial-gradient(700px 500px at 110% 95%, rgba(255, 151, 45, 0.12), transparent 60%),
+    #f3f9ff;
+}
+.ns_xp_card {
+  animation: ns_xp_in 0.6s cubic-bezier(.2,.8,.2,1) both;
+}
+.ns_xp_card:nth-child(1) { animation-delay: 0.05s; }
+.ns_xp_card:nth-child(2) { animation-delay: 0.10s; }
+.ns_xp_card:nth-child(3) { animation-delay: 0.15s; }
+.ns_xp_card:nth-child(4) { animation-delay: 0.20s; }
+.ns_xp_card:nth-child(5) { animation-delay: 0.25s; }
+.ns_xp_card:nth-child(6) { animation-delay: 0.30s; }
+.ns_xp_card .list_inner {
+  position: relative;
+  border-radius: 18px !important;
+  padding: 36px 44px !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(165, 166, 255, 0.22) !important;
+  box-shadow: var(--shadow-card) !important;
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease, border-color 0.4s ease !important;
+  overflow: hidden;
+  isolation: isolate;
+}
+.ns_xp_card .list_inner::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent, #5a4fcf), transparent 80%);
+}
+.ns_xp_glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent, #5a4fcf) 22%, transparent),
+    transparent 60%);
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+.ns_xp_card:hover .list_inner {
+  transform: translateY(-6px) !important;
+  border-color: color-mix(in srgb, var(--accent, #5a4fcf) 45%, rgba(165, 166, 255, 0.22)) !important;
+  box-shadow: 0 32px 60px -22px rgba(19, 15, 73, 0.32),
+              0 0 0 1px color-mix(in srgb, var(--accent, #5a4fcf) 30%, transparent) !important;
+}
+.ns_xp_card:hover .ns_xp_glow { opacity: 1; }
+.ns_xp_card .short,
+.ns_xp_card .text { position: relative; z-index: 1; }
+.ns_xp_card .job h3 i {
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 4px;
+  color: var(--accent, #5a4fcf);
+  opacity: 0.6;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.ns_xp_card:hover .job h3 i {
+  transform: translate(2px, -2px);
+  opacity: 1;
+}
+
+/* Equal-height cards: every description reserves 4 lines of text */
+.ns_xp_list ul li.ns_xp_card {
+  display: flex;
+  float: none;
+}
+.ns_xp_card .list_inner {
+  display: flex;
+  flex-direction: column;
+  float: none !important;
+  height: 100%;
+}
+.ns_xp_card .text {
+  flex: 1 1 auto;
+  float: none;
+}
+.ns_xp_card .text p {
+  min-height: calc(4 * 32px);
+  line-height: 32px;
+}
+
+/* ---------- PORTFOLIO: 3D tilt cards with glare + accent ---------- */
+.ns_proj_card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --gx: 50%;
+  --gy: 50%;
+  position: relative;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+.ns_proj_card .list_inner {
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+}
+.ns_proj_card .image {
+  position: relative;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+.ns_proj_card .image::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent, #5a4fcf), transparent 60%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: blur(2px);
+}
+.ns_proj_card:hover .image::before { opacity: 0.85; }
+.ns_proj_glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(360px circle at var(--gx) var(--gy),
+    rgba(255, 255, 255, 0.45), transparent 55%);
+  mix-blend-mode: overlay;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+.ns_proj_card:hover .ns_proj_glare { opacity: 1; }
+.ns_proj_card .details .title a {
+  background: linear-gradient(90deg, currentColor, currentColor) no-repeat;
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  transition: background-size 0.4s ease, color 0.3s ease;
+  padding-bottom: 2px;
+}
+.ns_proj_card:hover .details .title a {
+  background-size: 100% 2px;
+  color: var(--accent, #5a4fcf);
+}
+
+/* ---------- TESTIMONIAL polish (extra) ---------- */
+.elisc_tm_testimonials .swiper-slide .text {
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease;
+}
+.elisc_tm_testimonials .swiper-slide .text:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-lift);
+}
+
+/* ---------- CONTACT polish ---------- */
+.elisc_tm_contact .right .fields {
+  position: relative;
+}
+.elisc_tm_contact .first input,
+.elisc_tm_contact .last textarea {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.elisc_tm_contact .first input:focus,
+.elisc_tm_contact .last textarea:focus {
+  border-color: #5a4fcf !important;
+  box-shadow: 0 0 0 4px rgba(165, 166, 255, 0.22);
+  background: #fff;
+}
+
+/* ---------- gentler default for body cursor when spotlight is on ---------- */
+body { cursor: auto; }
+
+/* =====================================================================
+   LIVING / BREATHING PASS — extra warmth on the quieter sections:
+   Portfolio, the stats counter inside Content, the testimonials swiper,
+   and Contact. Reuses the existing fx_* keyframes so the motion language
+   matches the hero.
+   ===================================================================== */
+
+/* ----- shared: subtle shimmer on the small dash-label above each h3 ----- */
+.elisc_tm_portfolio_title .elisc_tm_title > span,
+.elisc_tm_contact .elisc_tm_title > span {
+  background: linear-gradient(90deg, #5a4fcf 0%, #a5a6ff 40%, #ff972d 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: fx_gradient_pan 7s ease-in-out infinite;
+}
+
+/* ----- PORTFOLIO: aurora drift + gradient title + breathing arrows ----- */
+.elisc_tm_portfolio.ns_portfolio_section {
+  position: relative;
+  isolation: isolate;
+}
+.elisc_tm_portfolio.ns_portfolio_section::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  background:
+    radial-gradient(closest-side, rgba(255, 151, 45, 0.20), transparent 70%) 8% 18% / 42% 42% no-repeat,
+    radial-gradient(closest-side, rgba(165, 166, 255, 0.28), transparent 70%) 88% 30% / 38% 38% no-repeat,
+    radial-gradient(closest-side, rgba(90, 209, 217, 0.22), transparent 70%) 50% 92% / 46% 46% no-repeat;
+  filter: blur(72px);
+  opacity: 0.55;
+  animation: fx_drift 28s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+.elisc_tm_portfolio_title .elisc_tm_title h3 {
+  background: linear-gradient(135deg, #130f49 0%, #5a4fcf 60%, #a5a6ff 110%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  letter-spacing: -0.5px;
+}
+.elisc_tm_portfolio_title .buttons a {
+  position: relative;
+}
+.elisc_tm_portfolio_title .buttons a::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: fx_pulse_ring 4s ease-in-out infinite;
+}
+.elisc_tm_portfolio_title .buttons a:nth-child(2)::after {
+  animation-delay: -2s;
+}
+
+/* ----- CONTENT counter: solid bold purple digits to match the original
+   look. The ∞ in the Aura cell stays in the same family — same color and
+   weight as the numbers — so the row reads as a single unit. */
+.ns_countup {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----- TESTIMONIALS: floating quote glyphs + spinning avatar halo ----- */
+.elisc_tm_testimonials .swiper-slide .text::before {
+  animation: fx_float 7s ease-in-out infinite;
+}
+.elisc_tm_testimonials .swiper-slide .text::after {
+  animation: fx_float 7s ease-in-out infinite;
+  animation-delay: -3.5s;
+}
+.elisc_tm_testimonials .short .image::after {
+  animation: fx_spin 14s linear infinite;
+}
+
+/* ----- CONTACT: ambient orbs, animated icons, open pill, SF map pin ----- */
+.elisc_tm_contact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden; /* clip the blurred ::before glow so it can't add scroll height */
+}
+.elisc_tm_contact::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  background:
+    radial-gradient(closest-side, rgba(165, 166, 255, 0.32), transparent 70%) 10% 12% / 44% 44% no-repeat,
+    radial-gradient(closest-side, rgba(90, 209, 217, 0.28), transparent 70%) 92% 82% / 36% 36% no-repeat,
+    radial-gradient(closest-side, rgba(255, 151, 45, 0.20), transparent 70%) 60% 8% / 28% 28% no-repeat;
+  filter: blur(80px);
+  opacity: 0.55;
+  animation: fx_drift 30s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+.elisc_tm_contact .info ul li i {
+  display: inline-block;
+  margin-right: 8px;
+  color: #5a4fcf;
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1), color 0.3s ease;
+  vertical-align: -1px;
+}
+.elisc_tm_contact .info ul li:hover i {
+  transform: rotate(-10deg) scale(1.15);
+  color: #ff972d;
+}
+.elisc_tm_contact .elisc_tm_title h3 {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* "Open to Chat" status pill — animated green dot built into the bg.
+   Specificity bump: the legacy `.elisc_tm_title span { width: 100%; float: left;
+   display: inline-block }` in public/css/style.css would otherwise stretch
+   this span to the full title width and stomp our display mode. */
+.elisc_tm_title .ns_open_pill,
+.ns_open_pill {
+  width: auto;
+  float: none;
+  margin-bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 12px 0 26px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle 3.5px at 13px center, #22c55e 100%, transparent 100%) no-repeat,
+    rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.45);
+  color: #15803d;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  vertical-align: middle;
+  animation: fx_open_pulse 2.2s ease-in-out infinite;
+  -webkit-text-fill-color: #15803d;
+}
+@keyframes fx_open_pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  50%      { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.18); }
+}
+
+/* Submit button: gradient + lift, matching the hero buttons */
+.elisc_tm_contact .elisc_tm_button input[type="submit"] {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #130f49 0%, #2a1d8c 60%, #5a4fcf 100%);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 10px 25px -10px rgba(19, 15, 73, 0.55);
+  transition: transform 0.3s cubic-bezier(.2,.8,.2,1), box-shadow 0.3s ease, background 0.3s ease;
+}
+.elisc_tm_contact .elisc_tm_button input[type="submit"]:hover {
+  background: linear-gradient(135deg, #130f49 0%, #5a4fcf 50%, #a5a6ff 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px -12px rgba(19, 15, 73, 0.65);
+}
+
+/* Map / header photo at the bottom of Contact: just frame it with a soft
+   card treatment and a gentle hover lift — the image is a photo, not a real
+   map, so no pin or color-wash overlay. */
+.elisc_tm_map {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow:
+    0 25px 50px -25px rgba(19, 15, 73, 0.3),
+    0 0 40px -20px rgba(165, 166, 255, 0.4);
+  transition: transform 0.5s cubic-bezier(.2,.8,.2,1), box-shadow 0.5s ease;
+}
+.elisc_tm_map:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 35px 70px -25px rgba(19, 15, 73, 0.4),
+    0 0 60px -10px rgba(165, 166, 255, 0.55);
+}
+
+/* ---------- prefers reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ns_progress_bar,
+  .ns_cursor_spotlight,
+  .ns_cursor_trail,
+  .ns_hero_shapes,
+  .ns_scroll_cue { display: none !important; }
+  .ns_wave,
+  .ns_open_pill,
+  .elisc_tm_portfolio.ns_portfolio_section::before,
+  .elisc_tm_contact::before,
+  .elisc_tm_testimonials .swiper-slide .text::before,
+  .elisc_tm_testimonials .swiper-slide .text::after,
+  .elisc_tm_testimonials .short .image::after,
+  .elisc_tm_portfolio_title .buttons a::after { animation: none !important; }
+}
+
