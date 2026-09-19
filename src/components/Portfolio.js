@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { context } from "../context/context";
 import { sliderProps } from "../sliderProps";
@@ -24,6 +24,7 @@ const projects = [
   {
     id: "slopgame",
     img: "img/portfolio/slopgame.png",
+    video: "/videos/portfolio/slopgame.mp4",
     category: "AI Image Game",
     title: "SlopGame.tv",
     href: "https://slopgame.tv",
@@ -33,6 +34,7 @@ const projects = [
   {
     id: "dragonwind",
     img: "img/portfolio/dragonwing.png",
+    video: "/videos/portfolio/dragonwind.mp4",
     category: "Dragon Flight Simulator",
     title: "Dragonwind.io",
     href: "https://dragons-beta.vercel.app/",
@@ -51,6 +53,7 @@ const projects = [
   {
     id: "pokerun",
     img: "img/portfolio/pokerun.png",
+    video: "/videos/portfolio/pokerun.mp4",
     category: "1,000+ Players",
     title: "PokeRun.io",
     href: "https://pokerun.io",
@@ -66,6 +69,68 @@ const projects = [
   //   accent: "#ffd166",
   // },
 ];
+
+const playMuted = (el) => {
+  el.muted = true;
+  const p = el.play();
+  if (p && typeof p.catch === "function") p.catch(() => {});
+};
+
+// Muted loop recorded from the live site, layered over the screenshot. The
+// screenshot stays visible until the video is actually playing, and remains the
+// fallback if it never loads (reduced motion, save-data, blocked autoplay, 404).
+const PreviewVideo = ({ src }) => {
+  const ref = useRef(null);
+  const inView = useRef(false);
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const reduceMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (reduceMotion || navigator.connection?.saveData) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          if (!el.getAttribute("src")) el.src = src;
+          playMuted(el);
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [src]);
+
+  return (
+    <video
+      ref={ref}
+      className={`ns_proj_video ${playing ? "is-playing" : ""}`}
+      muted
+      loop
+      playsInline
+      disablePictureInPicture
+      preload="none"
+      aria-hidden="true"
+      tabIndex={-1}
+      onPlaying={() => setPlaying(true)}
+      // Swiper's loop mode re-appends slides, and detaching a <video> pauses it
+      // without the observer noticing; resume if the card is still on screen.
+      onPause={() => {
+        if (inView.current && document.visibilityState === "visible") {
+          playMuted(ref.current);
+        }
+      }}
+      onError={() => setPlaying(false)}
+    />
+  );
+};
 
 const ProjectCard = ({ project, onPopup }) => {
   const ref = useRef(null);
@@ -111,7 +176,9 @@ const ProjectCard = ({ project, onPopup }) => {
       <div className="list_inner">
         <div className="image">
           <img src="img/thumbs/31-36.jpg" alt="image" />
-          <div className="main" data-img-url={project.img} />
+          <div className="main" data-img-url={project.img}>
+            {project.video && <PreviewVideo src={project.video} />}
+          </div>
           <div className="ns_proj_glare" />
           <a
             className={`elisc_tm_full_link ${project.popup ? "portfolio_popup" : ""}`}
