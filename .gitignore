@@ -8,3 +8,7 @@ node_modules/
 
 # Claude Code
 .claude/
+
+# Local secrets
+.env*.local
+.vercel
